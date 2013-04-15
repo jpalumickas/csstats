@@ -1,0 +1,3 @@
+module CSstats
+
+end

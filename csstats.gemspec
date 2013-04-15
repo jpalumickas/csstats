@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency 'bundler', '~> 1.0'
+  gem.add_dependency 'hashie', '~> 2.0'
 
   gem.version = CSstats::VERSION
 end

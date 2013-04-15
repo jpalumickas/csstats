@@ -24,6 +24,17 @@ Or install it yourself as:
 
 ```ruby
 require 'csstats'
+
+stats = CSstats.new(path: 'csstats.dat')
+stats.player(2).nick
+```
+
+You can set maxplayers value if you need to get specified number of players.
+
+```ruby
+stats = CSstats.new(path: 'csstats.dat', maxplayers: 15)
+stats.players_count
+ # => 15
 ```
 
 ## Supported Ruby Versions

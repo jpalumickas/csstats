@@ -16,14 +16,7 @@ RSpec.configure do |config|
   end
 end
 
-def fixture_path
-  File.expand_path("../fixtures", __FILE__)
-end
-
-def fixture(file)
-  File.new(fixture_path + '/' + file)
-end
-
 def csstats_file
-  fixture('csstats.dat').path
+  fixtures = File.expand_path("../fixtures", __FILE__)
+  File.new(fixtures + '/csstats.dat').path
 end

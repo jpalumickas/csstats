@@ -4,6 +4,13 @@ module CSstats
   class Handler
     attr_accessor :path, :players, :fileversion, :position
 
+    # Initialize file.
+    #
+    # Options:
+    #   path - The String of csstats.dat file.
+    #   maxplayers - The Integer of how many players to return.
+    #
+    # Returns nothing.
     def initialize(options={})
       @path = options[:path]
       @players = []
@@ -28,6 +35,11 @@ module CSstats
       end
     end
 
+    # Read player information from file.
+    #
+    # handle - The File which was opened for reading data.
+    #
+    # Returns The Hash (Mash) of player information.
     def read_player(handle)
       p = Hashie::Mash.new
       l = read_short_data(handle);
@@ -66,30 +78,48 @@ module CSstats
       return p
     end
 
+    # Get the 32bit integer from file.
+    #
+    # handle - The File which was opened for reading data.
+    #
+    # Returns the integer.
     def read_int_data(handle)
-      #f = File.new(handle)
       d  = handle.read(4)
+      # Return error if something wrong.
       d = d.unpack("V")
       return d[0]
     end
 
+    # Get the 16bit integer from file.
+    #
+    # handle - The File which was opened for reading data.
+    #
+    # Returns the integer.
     def read_short_data(handle)
-      #f = File.new(handle)
       d  = handle.read(2)
-      #if ($d === false)
-      #  throw new CSstatsException("Can not read data.");
+      # Return error if something wrong.
       d = d.unpack("v")
       return d[0]
     end
 
+    # Get the string from file.
+    #
+    # handle - The File which was opened for reading data.
+    # len - length of string to read.
+    #
+    # Returns the string.
     def read_string_data(handle, len)
       d  = handle.read(len)
-      #if ($d === false)
-      #  throw new CSstatsException("Can not read data.");
+      # Return error if something wrong.
       d = d.strip
       return d
     end
 
+    # Get the player information of specified id.
+    #
+    # id - The Integer of player id.
+    #
+    # Returns the Hash of player information.
     def player(id)
       unless (@players[id].nil?)
         @players[id]
@@ -98,6 +128,9 @@ module CSstats
       end
     end
 
+    # Get total players count.
+    #
+    # Returns the Integer of player count.
     def players_count
       @players.count - 1
     end

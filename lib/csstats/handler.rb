@@ -84,8 +84,8 @@ module CSstats
     #
     # Returns the integer.
     def read_int_data(handle)
-      d  = handle.read(4)
-      # Return error if something wrong.
+      d = handle.read(4)
+      raise CSstats::Error, "Cannot read int data." unless d
       d = d.unpack("V")
       return d[0]
     end
@@ -96,8 +96,8 @@ module CSstats
     #
     # Returns the integer.
     def read_short_data(handle)
-      d  = handle.read(2)
-      # Return error if something wrong.
+      d = handle.read(2)
+      raise CSstats::Error, "Cannot read short data." unless d
       d = d.unpack("v")
       return d[0]
     end
@@ -109,8 +109,8 @@ module CSstats
     #
     # Returns the string.
     def read_string_data(handle, len)
-      d  = handle.read(len)
-      # Return error if something wrong.
+      d = handle.read(len)
+      raise CSstats::Error, "Cannot read string data." unless d
       d = d.strip
       return d
     end

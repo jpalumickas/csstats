@@ -1,3 +1,4 @@
+require 'csstats/error'
 require 'csstats/handler'
 
 module CSstats

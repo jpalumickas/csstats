@@ -41,41 +41,41 @@ module CSstats
     #
     # Returns The Hash (Mash) of player information.
     def read_player(handle)
-      p = Hashie::Mash.new
+      hash = Hashie::Mash.new
       l = read_short_data(handle);
 
       return nil if (l == 0)
 
-      p['nick'] = read_string_data(handle, l)
+      hash['nick'] = read_string_data(handle, l)
       l = read_short_data(handle)
-      p['uniq'] = read_string_data(handle, l)
+      hash['uniq'] = read_string_data(handle, l)
 
-      p['teamkill'] = read_int_data(handle)
-      p['damage'] = read_int_data(handle)
-      p['deaths'] = read_int_data(handle)
-      p['kills'] = read_int_data(handle)
-      p['shots'] = read_int_data(handle)
-      p['hits'] = read_int_data(handle)
-      p['headshots'] = read_int_data(handle)
+      hash['teamkill'] = read_int_data(handle)
+      hash['damage'] = read_int_data(handle)
+      hash['deaths'] = read_int_data(handle)
+      hash['kills'] = read_int_data(handle)
+      hash['shots'] = read_int_data(handle)
+      hash['hits'] = read_int_data(handle)
+      hash['headshots'] = read_int_data(handle)
 
-      p['defusions'] = read_int_data(handle)
-      p['defused'] = read_int_data(handle)
-      p['plants'] = read_int_data(handle)
-      p['explosions'] = read_int_data(handle)
-
-      read_int_data(handle) # 0x00000000
-
-      p['head'] = read_int_data(handle)
-      p['chest'] = read_int_data(handle)
-      p['stomach'] = read_int_data(handle)
-      p['leftarm'] = read_int_data(handle)
-      p['rightarm'] = read_int_data(handle)
-      p['leftleg'] = read_int_data(handle)
-      p['rightleg'] = read_int_data(handle)
+      hash['defusions'] = read_int_data(handle)
+      hash['defused'] = read_int_data(handle)
+      hash['plants'] = read_int_data(handle)
+      hash['explosions'] = read_int_data(handle)
 
       read_int_data(handle) # 0x00000000
 
-      return p
+      hash['head'] = read_int_data(handle)
+      hash['chest'] = read_int_data(handle)
+      hash['stomach'] = read_int_data(handle)
+      hash['leftarm'] = read_int_data(handle)
+      hash['rightarm'] = read_int_data(handle)
+      hash['leftleg'] = read_int_data(handle)
+      hash['rightleg'] = read_int_data(handle)
+
+      read_int_data(handle) # 0x00000000
+
+      return hash
     end
 
     # Get the 32bit integer from file.
@@ -84,10 +84,10 @@ module CSstats
     #
     # Returns the integer.
     def read_int_data(handle)
-      d = handle.read(4)
-      raise CSstats::Error, "Cannot read int data." unless d
-      d = d.unpack("V")
-      return d[0]
+      data = handle.read(4)
+      raise CSstats::Error, "Cannot read int data." unless data
+      data = data.unpack("V")
+      return data.first
     end
 
     # Get the 16bit integer from file.
@@ -96,10 +96,10 @@ module CSstats
     #
     # Returns the integer.
     def read_short_data(handle)
-      d = handle.read(2)
-      raise CSstats::Error, "Cannot read short data." unless d
-      d = d.unpack("v")
-      return d[0]
+      data = handle.read(2)
+      raise CSstats::Error, "Cannot read short data." unless data
+      data = data.unpack("v")
+      return data.first
     end
 
     # Get the string from file.
@@ -108,11 +108,11 @@ module CSstats
     # len - length of string to read.
     #
     # Returns the string.
-    def read_string_data(handle, len)
-      d = handle.read(len)
-      raise CSstats::Error, "Cannot read string data." unless d
-      d = d.strip
-      return d
+    def read_string_data(handle, length)
+      data = handle.read(length)
+      raise CSstats::Error, "Cannot read string data." unless data
+      data = data.strip
+      return data
     end
 
     # Get the player information of specified id.

@@ -135,6 +135,11 @@ module CSstats
       @players.count
     end
 
+    # Get player by specified name.
+    #
+    # name - The String of player name.
+    #
+    # Returns the Hash of player information.
     def search_by_name(name)
       @players.each do |player|
         return player if (name == player.nick)

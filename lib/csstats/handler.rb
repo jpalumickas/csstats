@@ -24,11 +24,11 @@ module CSstats
 
       @fileversion = read_short_data(handle);
 
-      i = 1
-      while (!handle.eof? && (maxplayers == 0 || i <= maxplayers))
+      i = 0
+      while (!handle.eof? && (maxplayers == 0 || i < maxplayers))
         player = read_player(handle)
         if player
-          player['rank'] = i
+          player['rank'] = i+1
           players[i] = player
         end
         i = i + 1
@@ -121,8 +121,8 @@ module CSstats
     #
     # Returns the Hash of player information.
     def player(id)
-      unless (@players[id].nil?)
-        @players[id]
+      unless (@players[id-1].nil?)
+        @players[id-1]
       else
         nil
       end
@@ -132,7 +132,13 @@ module CSstats
     #
     # Returns the Integer of player count.
     def players_count
-      @players.count - 1
+      @players.count
+    end
+
+    def search_by_name(name)
+      @players.each do |player|
+        return player if (name == player.nick)
+      end
     end
   end
 end

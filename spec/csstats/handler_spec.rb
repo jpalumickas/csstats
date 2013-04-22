@@ -14,4 +14,9 @@ describe CSstats::Handler do
     expect(@handler.player(2).nick).to eq "CHMARSON"
   end
 
+  it "should return searched player" do
+    player = @handler.search_by_name("CHMARSON")
+    expect(player.nick).to eq "CHMARSON"
+  end
+
 end

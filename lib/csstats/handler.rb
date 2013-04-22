@@ -123,8 +123,6 @@ module CSstats
     def player(id)
       unless (@players[id-1].nil?)
         @players[id-1]
-      else
-        nil
       end
     end
 

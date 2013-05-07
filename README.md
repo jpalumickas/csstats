@@ -39,6 +39,13 @@ stats.players_count
  # => 15
 ```
 
+You can find player by specified name.
+
+```ruby
+stats = CSstats.new(path: 'csstats.dat')
+stats.search_by_name('nick')
+```
+
 ## Supported Ruby Versions
 
 This library aims to support and is [tested against][travis] the following Ruby

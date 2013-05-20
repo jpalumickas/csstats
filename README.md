@@ -7,6 +7,7 @@ in AMX Mod X ([http://www.amxmodx.org/][amxx])
 [![Build Status](https://secure.travis-ci.org/jpalumickas/csstats.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/jpalumickas/csstats.png?travis)][gemnasium]
 [![Coverage Status](https://coveralls.io/repos/jpalumickas/csstats/badge.png?branch=master)][coveralls]
+[![Code Climate](https://codeclimate.com/github/jpalumickas/csstats.png)][codeclimate]
 
 ## Installation
 
@@ -63,6 +64,7 @@ See [LICENSE][] for details.
 [travis]: http://travis-ci.org/jpalumickas/csstats
 [gemnasium]: https://gemnasium.com/jpalumickas/csstats
 [coveralls]: https://coveralls.io/r/jpalumickas/csstats
+[codeclimate]: https://codeclimate.com/github/jpalumickas/csstats
 
 [amxx]: http://www.amxmodx.org/
 [license]: LICENSE.md

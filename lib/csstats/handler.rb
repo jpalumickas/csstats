@@ -42,13 +42,13 @@ module CSstats
     # Returns The Hash (Mash) of player information.
     def read_player(handle)
       hash = Hashie::Mash.new
-      l = read_short_data(handle);
+      length = read_short_data(handle);
 
-      return nil if (l == 0)
+      return nil if (length == 0)
 
-      hash['nick'] = read_string_data(handle, l)
-      l = read_short_data(handle)
-      hash['uniq'] = read_string_data(handle, l)
+      hash['nick'] = read_string_data(handle, length)
+      length = read_short_data(handle)
+      hash['uniq'] = read_string_data(handle, length)
 
       hash['teamkill'] = read_int_data(handle)
       hash['damage'] = read_int_data(handle)

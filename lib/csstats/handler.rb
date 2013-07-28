@@ -28,7 +28,7 @@ module CSstats
       while (!handle.eof? && (maxplayers == 0 || i < maxplayers))
         player = read_player(handle)
         if player
-          player['rank'] = i+1
+          player['rank'] = i + 1
           players[i] = player
         end
         i = i + 1

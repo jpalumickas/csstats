@@ -86,8 +86,7 @@ module CSstats
     def read_int_data(handle)
       data = handle.read(4)
       raise CSstats::Error, "Cannot read int data." unless data
-      data = data.unpack("V")
-      return data.first
+      return data.unpack("V").first
     end
 
     # Get the 16bit integer from file.
@@ -98,8 +97,7 @@ module CSstats
     def read_short_data(handle)
       data = handle.read(2)
       raise CSstats::Error, "Cannot read short data." unless data
-      data = data.unpack("v")
-      return data.first
+      return data.unpack("v").first
     end
 
     # Get the string from file.

@@ -41,44 +41,45 @@ module CSstats
     #
     # Returns The Hash (Mash) of player information.
     def read_player(handle)
-      hash = Hashie::Mash.new
       length = read_short_data(handle);
 
       return nil if (length == 0)
 
-      hash.nick = read_string_data(handle, length)
+      mash = Hashie::Mash.new
+
+      mash.nick = read_string_data(handle, length)
       length = read_short_data(handle)
-      hash.uniq = read_string_data(handle, length)
+      mash.uniq = read_string_data(handle, length)
 
-      hash.teamkill = read_int_data(handle)
-      hash.damage = read_int_data(handle)
-      hash.deaths = read_int_data(handle)
-      hash.kills = read_int_data(handle)
-      hash.shots = read_int_data(handle)
-      hash.hits = read_int_data(handle)
-      hash.headshots = read_int_data(handle)
+      mash.teamkill = read_int_data(handle)
+      mash.damage = read_int_data(handle)
+      mash.deaths = read_int_data(handle)
+      mash.kills = read_int_data(handle)
+      mash.shots = read_int_data(handle)
+      mash.hits = read_int_data(handle)
+      mash.headshots = read_int_data(handle)
 
-      hash.defusions = read_int_data(handle)
-      hash.defused = read_int_data(handle)
-      hash.plants = read_int_data(handle)
-      hash.explosions = read_int_data(handle)
-
-      read_int_data(handle) # 0x00000000
-
-      hash.head = read_int_data(handle)
-      hash.chest = read_int_data(handle)
-      hash.stomach = read_int_data(handle)
-      hash.leftarm = read_int_data(handle)
-      hash.rightarm = read_int_data(handle)
-      hash.leftleg = read_int_data(handle)
-      hash.rightleg = read_int_data(handle)
-
-      hash.acc = hash.hits / hash.shots * 100
-      hash.eff = hash.kills / (hash.kills + hash.deaths) * 100
+      mash.defusions = read_int_data(handle)
+      mash.defused = read_int_data(handle)
+      mash.plants = read_int_data(handle)
+      mash.explosions = read_int_data(handle)
 
       read_int_data(handle) # 0x00000000
 
-      return hash
+      mash.head = read_int_data(handle)
+      mash.chest = read_int_data(handle)
+      mash.stomach = read_int_data(handle)
+      mash.leftarm = read_int_data(handle)
+      mash.rightarm = read_int_data(handle)
+      mash.leftleg = read_int_data(handle)
+      mash.rightleg = read_int_data(handle)
+
+      mash.acc = mash.hits / mash.shots * 100
+      mash.eff = mash.kills / (mash.kills + mash.deaths) * 100
+
+      read_int_data(handle) # 0x00000000
+
+      return mash
     end
 
     # Get the 32bit integer from file.

@@ -73,8 +73,8 @@ module CSstats
       hash.leftleg = read_int_data(handle)
       hash.rightleg = read_int_data(handle)
 
-      hash.acc = hash['hits'] / hash['shots'] * 100
-      hash.eff = hash['kills'] / (hash['kills'] + hash['deaths']) * 100
+      hash.acc = hash.hits / hash.shots * 100
+      hash.eff = hash.kills / (hash.kills + hash.deaths) * 100
 
       read_int_data(handle) # 0x00000000
 

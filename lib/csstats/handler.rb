@@ -46,35 +46,35 @@ module CSstats
 
       return nil if (length == 0)
 
-      hash['nick'] = read_string_data(handle, length)
+      hash.nick = read_string_data(handle, length)
       length = read_short_data(handle)
-      hash['uniq'] = read_string_data(handle, length)
+      hash.uniq = read_string_data(handle, length)
 
-      hash['teamkill'] = read_int_data(handle)
-      hash['damage'] = read_int_data(handle)
-      hash['deaths'] = read_int_data(handle)
-      hash['kills'] = read_int_data(handle)
-      hash['shots'] = read_int_data(handle)
-      hash['hits'] = read_int_data(handle)
-      hash['headshots'] = read_int_data(handle)
+      hash.teamkill = read_int_data(handle)
+      hash.damage = read_int_data(handle)
+      hash.deaths = read_int_data(handle)
+      hash.kills = read_int_data(handle)
+      hash.shots = read_int_data(handle)
+      hash.hits = read_int_data(handle)
+      hash.headshots = read_int_data(handle)
 
-      hash['defusions'] = read_int_data(handle)
-      hash['defused'] = read_int_data(handle)
-      hash['plants'] = read_int_data(handle)
-      hash['explosions'] = read_int_data(handle)
+      hash.defusions = read_int_data(handle)
+      hash.defused = read_int_data(handle)
+      hash.plants = read_int_data(handle)
+      hash.explosions = read_int_data(handle)
 
       read_int_data(handle) # 0x00000000
 
-      hash['head'] = read_int_data(handle)
-      hash['chest'] = read_int_data(handle)
-      hash['stomach'] = read_int_data(handle)
-      hash['leftarm'] = read_int_data(handle)
-      hash['rightarm'] = read_int_data(handle)
-      hash['leftleg'] = read_int_data(handle)
-      hash['rightleg'] = read_int_data(handle)
+      hash.head = read_int_data(handle)
+      hash.chest = read_int_data(handle)
+      hash.stomach = read_int_data(handle)
+      hash.leftarm = read_int_data(handle)
+      hash.rightarm = read_int_data(handle)
+      hash.leftleg = read_int_data(handle)
+      hash.rightleg = read_int_data(handle)
 
-      hash['acc'] = hash['hits'] / hash['shots'] * 100
-      hash['eff'] = hash['kills'] / (hash['kills'] + hash['deaths']) * 100
+      hash.acc = hash['hits'] / hash['shots'] * 100
+      hash.eff = hash['kills'] / (hash['kills'] + hash['deaths']) * 100
 
       read_int_data(handle) # 0x00000000
 

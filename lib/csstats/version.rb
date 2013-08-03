@@ -1,3 +1,3 @@
 module CSstats
-  VERSION = "1.0.0" unless defined?(CSstats::VERSION)
+  VERSION = "1.0.1" unless defined?(CSstats::VERSION)
 end

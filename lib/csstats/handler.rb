@@ -4,10 +4,10 @@ module CSstats
   class Handler
     attr_accessor :path, :players, :fileversion, :position
 
-    # Initialize file.
+    # Public: Initialize file.
     #
     # Options:
-    #   path - The String of csstats.dat file.
+    #   path       - The String of csstats.dat file path.
     #   maxplayers - The Integer of how many players to return.
     #
     # Returns nothing.
@@ -35,11 +35,11 @@ module CSstats
       end
     end
 
-    # Read player information from file.
+    # Internal: Read player information from file.
     #
     # handle - The File which was opened for reading data.
     #
-    # Returns The Hash (Mash) of player information.
+    # Returns The Mash of player information.
     def read_player(handle)
       length = read_short_data(handle);
 
@@ -82,34 +82,34 @@ module CSstats
       return mash
     end
 
-    # Get the 32bit integer from file.
+    # Internal: Get the 32bit integer from file.
     #
     # handle - The File which was opened for reading data.
     #
-    # Returns the integer.
+    # Returns the Integer.
     def read_int_data(handle)
       data = handle.read(4)
       raise CSstats::Error, "Cannot read int data." unless data
       return data.unpack("V").first
     end
 
-    # Get the 16bit integer from file.
+    # Internal: Get the 16bit integer from file.
     #
     # handle - The File which was opened for reading data.
     #
-    # Returns the integer.
+    # Returns the Integer.
     def read_short_data(handle)
       data = handle.read(2)
       raise CSstats::Error, "Cannot read short data." unless data
       return data.unpack("v").first
     end
 
-    # Get the string from file.
+    # Internal: Get the String from file.
     #
     # handle - The File which was opened for reading data.
-    # len - length of string to read.
+    # len    - The Integer length of string to read.
     #
-    # Returns the string.
+    # Returns the String.
     def read_string_data(handle, length)
       data = handle.read(length)
       raise CSstats::Error, "Cannot read string data." unless data
@@ -117,11 +117,11 @@ module CSstats
       return data
     end
 
-    # Get the player information of specified id.
+    # Internal: Get the player information of specified id.
     #
     # id - The Integer of player id.
     #
-    # Returns the Hash of player information.
+    # Returns the Mash of player information.
     def player(id)
       unless (@players[id-1].nil?)
         @players[id-1]
@@ -139,7 +139,7 @@ module CSstats
     #
     # name - The String of player name.
     #
-    # Returns the Hash of player information.
+    # Returns the Mash of player information.
     def search_by_name(name)
       @players.each do |player|
         return player if (name == player.nick)

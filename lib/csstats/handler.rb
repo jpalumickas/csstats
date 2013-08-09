@@ -2,30 +2,29 @@ require 'hashie/mash'
 
 module CSstats
   class Handler
-    attr_accessor :path, :players, :fileversion, :position
+    attr_reader :path, :players
 
     # Public: Initialize file.
     #
-    # Options:
-    #   path       - The String of csstats.dat file path.
-    #   maxplayers - The Integer of how many players to return.
+    # options - The Hash options:
+    #   :path       - The String of csstats.dat file path (required).
+    #   :maxplayers - The Integer of how many players to return (optional).
     #
     # Returns nothing.
-    def initialize(options={})
+    def initialize(options = {})
       @path = options[:path]
       @players = []
-      @fileversion = 0x00
-      @position = 1
+
       maxplayers = options[:maxplayers] || 0
 
       return if @path.nil?
 
-      handle = File.new(@path, "r")
+      handle = File.new(@path, 'r')
 
-      @fileversion = read_short_data(handle);
+      @file_version = read_short_data(handle)
 
       i = 0
-      while (!handle.eof? && (maxplayers == 0 || i < maxplayers))
+      while !handle.eof? && (maxplayers == 0 || i < maxplayers)
         player = read_player(handle)
         if player
           player['rank'] = i + 1
@@ -41,9 +40,9 @@ module CSstats
     #
     # Returns The Mash of player information.
     def read_player(handle)
-      length = read_short_data(handle);
+      length = read_short_data(handle)
 
-      return nil if (length == 0)
+      return nil if length == 0
 
       mash = Hashie::Mash.new
 
@@ -79,7 +78,7 @@ module CSstats
 
       read_int_data(handle) # 0x00000000
 
-      return mash
+      mash
     end
 
     # Internal: Get the 32bit integer from file.
@@ -89,8 +88,8 @@ module CSstats
     # Returns the Integer.
     def read_int_data(handle)
       data = handle.read(4)
-      raise CSstats::Error, "Cannot read int data." unless data
-      return data.unpack("V").first
+      raise CSstats::Error, 'Cannot read int data.' unless data
+      data.unpack('V').first
     end
 
     # Internal: Get the 16bit integer from file.
@@ -100,8 +99,8 @@ module CSstats
     # Returns the Integer.
     def read_short_data(handle)
       data = handle.read(2)
-      raise CSstats::Error, "Cannot read short data." unless data
-      return data.unpack("v").first
+      raise CSstats::Error, 'Cannot read short data.' unless data
+      data.unpack('v').first
     end
 
     # Internal: Get the String from file.
@@ -112,9 +111,9 @@ module CSstats
     # Returns the String.
     def read_string_data(handle, length)
       data = handle.read(length)
-      raise CSstats::Error, "Cannot read string data." unless data
+      raise CSstats::Error, 'Cannot read string data.' unless data
       data = data.strip
-      return data
+      data
     end
 
     # Internal: Get the player information of specified id.
@@ -123,8 +122,8 @@ module CSstats
     #
     # Returns the Mash of player information.
     def player(id)
-      unless (@players[id-1].nil?)
-        @players[id-1]
+      unless @players[id - 1].nil?
+        @players[id - 1]
       end
     end
 
@@ -142,7 +141,7 @@ module CSstats
     # Returns the Mash of player information.
     def search_by_name(name)
       @players.each do |player|
-        return player if (name == player.nick)
+        return player if name == player.nick
       end
     end
   end

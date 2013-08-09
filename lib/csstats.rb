@@ -7,7 +7,7 @@ module CSstats
     # Alias for CSstats::Handler.new
     #
     # Returns CSstats::Handler
-    def new(options={})
+    def new(options = {})
       CSstats::Handler.new(options)
     end
 

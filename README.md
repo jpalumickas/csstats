@@ -44,7 +44,9 @@ You can find player by specified name.
 
 ```ruby
 stats = CSstats.new(path: 'csstats.dat')
-stats.search_by_name('nick')
+player_stats = stats.search_by_name('nick')
+
+puts player_stats.kills
 ```
 
 ## Supported Ruby Versions

@@ -73,8 +73,8 @@ module CSstats
       mash.leftleg = read_int_data(handle)
       mash.rightleg = read_int_data(handle)
 
-      mash.acc = mash.hits / mash.shots * 100
-      mash.eff = mash.kills / (mash.kills + mash.deaths) * 100
+      mash.acc = mash.hits.to_f / mash.shots.to_f * 100
+      mash.eff = mash.kills.to_f / (mash.kills.to_f + mash.deaths.to_f) * 100
 
       read_int_data(handle) # 0x00000000
 

@@ -73,8 +73,8 @@ module CSstats
       mash.leftleg = read_int_data(handle)
       mash.rightleg = read_int_data(handle)
 
-      mash.acc = mash.hits.to_f / mash.shots.to_f * 100
-      mash.eff = mash.kills.to_f / (mash.kills.to_f + mash.deaths.to_f) * 100
+      mash.acc = count_accuracy(mash.hits, mash.shots)
+      mash.eff = count_efficiency(mash.kills, mash.deaths)
 
       read_int_data(handle) # 0x00000000
 
@@ -143,6 +143,16 @@ module CSstats
       @players.each do |player|
         return player if name == player.nick
       end
+    end
+
+    private
+
+    def count_efficiency(kills, deaths)
+      (kills.to_f / (kills.to_f + deaths.to_f) * 100).round(2)
+    end
+
+    def count_accuracy(hits, shots)
+      (hits.to_f / shots.to_f * 100).round(2)
     end
   end
 end

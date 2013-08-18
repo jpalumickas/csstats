@@ -34,6 +34,57 @@ module CSstats
       end
     end
 
+    # Public: Get the player information of specified id.
+    #
+    # id - The Integer of player id.
+    #
+    # Returns the Mash of player information.
+    def player(id)
+      unless @players[id - 1].nil?
+        @players[id - 1]
+      end
+    end
+
+    # Public: Get total players count.
+    #
+    # Returns the Integer of player count.
+    def players_count
+      @players.count
+    end
+
+    # Public: Get player by specified name.
+    #
+    # name - The String of player name.
+    #
+    # Returns the Mash of player information.
+    def search_by_name(name)
+      @players.each do |player|
+        return player if name == player.nick
+      end
+    end
+
+    private
+
+    # Internal: Count player efficiency.
+    #
+    # kills  - The Integer of player kills in game.
+    # deaths - The Integer of player deaths in game.
+    #
+    # Returns The Float of player efficiency.
+    def count_efficiency(kills, deaths)
+      (kills.to_f / (kills.to_f + deaths.to_f) * 100).round(2)
+    end
+
+    # Internal: Count player accuracy.
+    #
+    # hits  - The Integer of player hits in game.
+    # shots - The Integer of player shots in game.
+    #
+    # Returns The Float of player accuracy.
+    def count_accuracy(hits, shots)
+      (hits.to_f / shots.to_f * 100).round(2)
+    end
+
     # Internal: Read player information from file.
     #
     # handle - The File which was opened for reading data.
@@ -114,45 +165,6 @@ module CSstats
       raise CSstats::Error, 'Cannot read string data.' unless data
       data = data.strip
       data
-    end
-
-    # Internal: Get the player information of specified id.
-    #
-    # id - The Integer of player id.
-    #
-    # Returns the Mash of player information.
-    def player(id)
-      unless @players[id - 1].nil?
-        @players[id - 1]
-      end
-    end
-
-    # Get total players count.
-    #
-    # Returns the Integer of player count.
-    def players_count
-      @players.count
-    end
-
-    # Get player by specified name.
-    #
-    # name - The String of player name.
-    #
-    # Returns the Mash of player information.
-    def search_by_name(name)
-      @players.each do |player|
-        return player if name == player.nick
-      end
-    end
-
-    private
-
-    def count_efficiency(kills, deaths)
-      (kills.to_f / (kills.to_f + deaths.to_f) * 100).round(2)
-    end
-
-    def count_accuracy(hits, shots)
-      (hits.to_f / shots.to_f * 100).round(2)
     end
   end
 end

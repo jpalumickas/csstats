@@ -24,6 +24,10 @@ describe CSstats::Handler do
       expect(@player.nick).to eq 'CHMARSON'
     end
 
+    it 'should return correct player rank' do
+      expect(@player.rank).to eq 2
+    end
+
     it 'should return correct player accuracy' do
       expect(@player.acc).to eq 30.62
     end

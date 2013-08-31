@@ -40,7 +40,7 @@ stats.players_count
  # => 15
 ```
 
-You can find player by specified name.
+You can get player information by specified name.
 
 ```ruby
 stats = CSstats.new(path: 'csstats.dat')

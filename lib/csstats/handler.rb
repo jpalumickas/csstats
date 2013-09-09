@@ -101,33 +101,17 @@ module CSstats
       length = read_short_data(handle)
       mash.uniq = read_string_data(handle, length)
 
-      mash.teamkill = read_int_data(handle)
-      mash.damage = read_int_data(handle)
-      mash.deaths = read_int_data(handle)
-      mash.kills = read_int_data(handle)
-      mash.shots = read_int_data(handle)
-      mash.hits = read_int_data(handle)
-      mash.headshots = read_int_data(handle)
+      read_data = %w(teamkill damage deaths kills shots hits headshots
+                     defusions defused plants explosions - head chest stomach
+                     leftarm rightarm leftleg rightleg -)
 
-      mash.defusions = read_int_data(handle)
-      mash.defused = read_int_data(handle)
-      mash.plants = read_int_data(handle)
-      mash.explosions = read_int_data(handle)
+      read_data.each { |data| mash[data] = read_int_data(handle) }
 
-      read_int_data(handle) # 0x00000000
-
-      mash.head = read_int_data(handle)
-      mash.chest = read_int_data(handle)
-      mash.stomach = read_int_data(handle)
-      mash.leftarm = read_int_data(handle)
-      mash.rightarm = read_int_data(handle)
-      mash.leftleg = read_int_data(handle)
-      mash.rightleg = read_int_data(handle)
+      # Remove all 0x00000000
+      mash.tap { |x| x.delete('-') }
 
       mash.acc = count_accuracy(mash.hits, mash.shots)
       mash.eff = count_efficiency(mash.kills, mash.deaths)
-
-      read_int_data(handle) # 0x00000000
 
       mash
     end

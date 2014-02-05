@@ -17,11 +17,11 @@ module CSstats
 
       maxplayers = options[:maxplayers] || 0
 
-      return if @path.nil?
+      return if path.nil?
 
-      handle = File.new(@path, 'r')
+      handle = File.new(path, 'r')
 
-      @file_version = read_short_data(handle)
+      file_version = read_short_data(handle)
 
       i = 0
       while !handle.eof? && (maxplayers == 0 || i < maxplayers)
@@ -40,8 +40,8 @@ module CSstats
     #
     # Returns the Mash of player information.
     def player(id)
-      unless @players[id - 1].nil?
-        @players[id - 1]
+      unless players[id - 1].nil?
+        players[id - 1]
       end
     end
 
@@ -49,7 +49,7 @@ module CSstats
     #
     # Returns the Integer of player count.
     def players_count
-      @players.count
+      players.count
     end
 
     # Public: Get player by specified name.
@@ -58,7 +58,7 @@ module CSstats
     #
     # Returns the Mash of player information.
     def search_by_name(name)
-      @players.each do |player|
+      players.each do |player|
         return player if name == player.nick
       end
     end
@@ -124,6 +124,7 @@ module CSstats
     def read_int_data(handle)
       data = handle.read(4)
       raise CSstats::Error, 'Cannot read int data.' unless data
+
       data.unpack('V').first
     end
 
@@ -135,6 +136,7 @@ module CSstats
     def read_short_data(handle)
       data = handle.read(2)
       raise CSstats::Error, 'Cannot read short data.' unless data
+
       data.unpack('v').first
     end
 
@@ -147,8 +149,8 @@ module CSstats
     def read_string_data(handle, length)
       data = handle.read(length)
       raise CSstats::Error, 'Cannot read string data.' unless data
-      data = data.strip
-      data
+
+      data.strip
     end
   end
 end

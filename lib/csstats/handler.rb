@@ -14,23 +14,23 @@ module CSstats
     def initialize(options = {})
       @path = options[:path]
       @players = []
+      return if path.nil?
 
       maxplayers = options[:maxplayers] || 0
 
-      return if path.nil?
-
-      handle = File.new(path, 'r')
-
-      file_version = read_short_data(handle)
+      file = File.new(path, 'r')
+      file_version = read_short_data(file)
 
       i = 0
-      while !handle.eof? && (maxplayers == 0 || i < maxplayers)
-        player = read_player(handle)
+      while !file.eof? && (maxplayers == 0 || i < maxplayers)
+        player = read_player(file)
+
         if player
           player['rank'] = i + 1
           players[i] = player
         end
-        i = i + 1
+
+        i += 1
       end
     end
 
@@ -40,9 +40,7 @@ module CSstats
     #
     # Returns the Mash of player information.
     def player(id)
-      unless players[id - 1].nil?
-        players[id - 1]
-      end
+      players[id - 1]
     end
 
     # Public: Get total players count.
@@ -58,9 +56,7 @@ module CSstats
     #
     # Returns the Mash of player information.
     def search_by_name(name)
-      players.each do |player|
-        return player if name == player.nick
-      end
+      players.find { |player| player.nick == name }
     end
 
     private
@@ -92,7 +88,6 @@ module CSstats
     # Returns The Mash of player information.
     def read_player(handle)
       length = read_short_data(handle)
-
       return nil if length == 0
 
       mash = Hashie::Mash.new

@@ -21,6 +21,6 @@ Gem::Specification.new do |gem|
   gem.test_files = gem.files.grep(/^(test|spec|features)\//)
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'hashie', '~> 3.3'
-  gem.add_development_dependency 'bundler', '~> 1.5'
+  gem.add_dependency 'hashie', '~> 3.4'
+  gem.add_development_dependency 'bundler', '~> 1.6'
 end

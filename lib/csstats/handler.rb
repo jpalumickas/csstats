@@ -2,7 +2,7 @@ require 'hashie/mash'
 
 module CSstats
   class Handler
-    attr_reader :path, :players
+    attr_reader :path, :players, :maxplayers
 
     # Public: Initialize file.
     #
@@ -13,25 +13,15 @@ module CSstats
     # Returns nothing.
     def initialize(options = {})
       @path = options[:path]
+      @maxplayers = options[:maxplayers] || 0
+
       @players = []
       fail CSstats::FileNotExist unless File.exist?(path.to_s)
 
-      maxplayers = options[:maxplayers] || 0
+      @file = File.new(path, 'r')
+      _file_version = read_short_data(@file)
 
-      file = File.new(path, 'r')
-      _file_version = read_short_data(file)
-
-      i = 0
-      while !file.eof? && (maxplayers == 0 || i < maxplayers)
-        player = read_player(file)
-
-        if player
-          player['rank'] = i + 1
-          players[i] = player
-        end
-
-        i += 1
-      end
+      read_players!
     end
 
     # Public: Get the player information of specified id.
@@ -60,6 +50,20 @@ module CSstats
     end
 
     private
+
+    def read_players!
+      i = 0
+      while !@file.eof? && (maxplayers == 0 || i < maxplayers)
+        player = read_player(@file)
+
+        if player
+          player['rank'] = i + 1
+          players[i] = player
+        end
+
+        i += 1
+      end
+    end
 
     # Internal: Count player efficiency.
     #

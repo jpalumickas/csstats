@@ -14,12 +14,12 @@ module CSstats
     def initialize(options = {})
       @path = options[:path]
       @players = []
-      return if path.nil?
+      fail CSstats::FileNotExist unless File.exist?(path.to_s)
 
       maxplayers = options[:maxplayers] || 0
 
       file = File.new(path, 'r')
-      file_version = read_short_data(file)
+      _file_version = read_short_data(file)
 
       i = 0
       while !file.eof? && (maxplayers == 0 || i < maxplayers)
@@ -88,27 +88,38 @@ module CSstats
     # Returns The Mash of player information.
     def read_player(handle)
       length = read_short_data(handle)
-      return nil if length == 0
+      return if length == 0
 
-      mash = Hashie::Mash.new
+      player_data = Hashie::Mash.new
 
-      mash.nick = read_string_data(handle, length)
+      player_data.nick = read_string_data(handle, length)
+
+      add_player_uniq(player_data, handle)
+      add_player_general_data(player_data, handle)
+      add_player_calculations(player_data)
+
+      player_data
+    end
+
+    def add_player_uniq(player_data, handle)
       length = read_short_data(handle)
-      mash.uniq = read_string_data(handle, length)
+      player_data.uniq = read_string_data(handle, length)
+    end
 
-      read_data = %w(teamkill damage deaths kills shots hits headshots
-                     defusions defused plants explosions - head chest stomach
-                     leftarm rightarm leftleg rightleg -)
+    def add_player_general_data(player_data, handle)
+      data_types = %w(teamkill damage deaths kills shots hits headshots
+                      defusions defused plants explosions - head chest stomach
+                      leftarm rightarm leftleg rightleg -)
 
-      read_data.each { |data| mash[data] = read_int_data(handle) }
+      data_types.each { |type| player_data[type] = read_int_data(handle) }
 
       # Remove all 0x00000000
-      mash.tap { |x| x.delete('-') }
+      player_data.tap { |x| x.delete('-') }
+    end
 
-      mash.acc = count_accuracy(mash.hits, mash.shots)
-      mash.eff = count_efficiency(mash.kills, mash.deaths)
-
-      mash
+    def add_player_calculations(player_data)
+      player_data.acc = count_accuracy(player_data.hits, player_data.shots)
+      player_data.eff = count_efficiency(player_data.kills, player_data.deaths)
     end
 
     # Internal: Get the 32bit integer from file.

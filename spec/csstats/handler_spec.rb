@@ -105,5 +105,9 @@ describe CSstats::Handler do
     it 'should return correct player efficiency' do
       expect(@player.eff).to eq 59.76
     end
+
+    it 'should not return empty data' do
+      expect(@player['-']).to eq nil
+    end
   end
 end

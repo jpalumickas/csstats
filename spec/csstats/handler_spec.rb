@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe CSstats::Handler do
-
   before do
     @handler = CSstats::Handler.new(path: csstats_file, maxplayers: 15)
   end
@@ -15,7 +14,6 @@ describe CSstats::Handler do
   end
 
   describe 'player with specified name' do
-
     before do
       @player = @handler.search_by_name('CHMARSON')
     end
@@ -33,7 +31,7 @@ describe CSstats::Handler do
     end
 
     it 'should return correct player damage' do
-      expect(@player.damage).to eq 101543
+      expect(@player.damage).to eq 101_543
     end
 
     it 'should return correct player deaths' do
@@ -107,6 +105,5 @@ describe CSstats::Handler do
     it 'should return correct player efficiency' do
       expect(@player.eff).to eq 59.76
     end
-
   end
 end

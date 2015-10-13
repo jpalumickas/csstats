@@ -1,8 +1,8 @@
 # CSstats
 
-[![Gem Version](http://img.shields.io/gem/v/csstats.svg?style=flat-square)][rubygems]
-[![Build Status](http://img.shields.io/travis/jpalumickas/csstats/master.svg?style=flat-square)][travis]
-[![Dependency Status](http://img.shields.io/gemnasium/jpalumickas/csstats.svg?style=flat-square)][gemnasium]
+[![Gem Version](https://img.shields.io/gem/v/csstats.svg?style=flat-square)][rubygems]
+[![Build Status](https://img.shields.io/travis/jpalumickas/csstats.svg?style=flat-square)][travis]
+[![Dependency Status](https://img.shields.io/gemnasium/jpalumickas/csstats.svg?style=flat-square)][gemnasium]
 [![Coverage Status](https://img.shields.io/coveralls/jpalumickas/csstats.svg?branch=master&style=flat-square)][coveralls]
 [![Code Climate](https://img.shields.io/codeclimate/github/jpalumickas/csstats.svg?style=flat-square)][codeclimate]
 

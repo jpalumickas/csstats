@@ -62,7 +62,7 @@ implementations:
 
 ## Copyright
 Copyright (c) 2013-2016 Justas Palumickas.
-See [LICENSE][] for details.
+See [LICENSE][license] for details.
 
 [rubygems]: https://rubygems.org/gems/csstats
 [travis]: http://travis-ci.org/jpalumickas/csstats
@@ -71,4 +71,4 @@ See [LICENSE][] for details.
 [codeclimate]: https://codeclimate.com/github/jpalumickas/csstats
 
 [amxx]: http://www.amxmodx.org/
-[license]: LICENSE.md
+[license]: https://raw.githubusercontent.com/jpalumickas/csstats/master/LICENSE

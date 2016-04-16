@@ -16,7 +16,7 @@ module CSstats
       @maxplayers = options[:maxplayers] || 0
 
       @players = []
-      fail CSstats::FileNotExist unless File.exist?(path.to_s)
+      raise CSstats::FileNotExist unless File.exist?(path.to_s)
 
       @file = File.new(path, 'r')
       _file_version = read_short_data(@file)
@@ -133,7 +133,7 @@ module CSstats
     # Returns the Integer.
     def read_int_data(handle)
       data = handle.read(4)
-      fail CSstats::Error, 'Cannot read int data.' unless data
+      raise CSstats::Error, 'Cannot read int data.' unless data
 
       data.unpack('V').first
     end
@@ -145,7 +145,7 @@ module CSstats
     # Returns the Integer.
     def read_short_data(handle)
       data = handle.read(2)
-      fail CSstats::Error, 'Cannot read short data.' unless data
+      raise CSstats::Error, 'Cannot read short data.' unless data
 
       data.unpack('v').first
     end
@@ -158,7 +158,7 @@ module CSstats
     # Returns the String.
     def read_string_data(handle, length)
       data = handle.read(length)
-      fail CSstats::Error, 'Cannot read string data.' unless data
+      raise CSstats::Error, 'Cannot read string data.' unless data
 
       data.strip
     end

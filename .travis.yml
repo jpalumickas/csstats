@@ -1,3 +1,8 @@
+sudo: false
+
+before_install:
+  - gem install bundler
+
 bundler_args: --without development
 
 language: ruby
@@ -8,6 +13,7 @@ rvm:
   - 2.0.0
   - 2.1.0
   - 2.2.0
+  - 2.3.0
   - ruby-head
   - jruby-19mode
   - jruby-head

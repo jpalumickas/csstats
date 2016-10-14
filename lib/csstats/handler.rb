@@ -53,7 +53,7 @@ module CSstats
 
     def read_players!
       i = 0
-      while !@file.eof? && (maxplayers == 0 || i < maxplayers)
+      while !@file.eof? && (maxplayers.zero? || i < maxplayers)
         player = read_player(@file)
 
         if player
@@ -92,7 +92,7 @@ module CSstats
     # Returns The Mash of player information.
     def read_player(handle)
       length = read_short_data(handle)
-      return if length == 0
+      return if length.zero?
 
       player_data = Hashie::Mash.new
 

@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
+group :development do
+  gem 'rubocop', '~> 0.44.1'
+end
+
 group :test do
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: false
   gem 'coveralls', '~> 0.8.15', require: false

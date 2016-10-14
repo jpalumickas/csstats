@@ -11,7 +11,7 @@ module CSstats
 
       # Internal: Parse player information from file.
       #
-      # handle - The File which was opened for reading data.
+      # handler - The File which was opened for reading data.
       #
       # Returns The Mash of player information.
       def parse(handler)
@@ -60,7 +60,10 @@ module CSstats
       #
       # Returns The Float of player efficiency.
       def count_efficiency(kills, deaths)
-        (kills.to_f / (kills.to_f + deaths.to_f) * 100).round(2)
+        kills_and_deaths = kills.to_f + deaths.to_f
+        return 0.0 if kills_and_deaths.zero?
+
+        (kills.to_f / kills_and_deaths * 100).round(2)
       end
 
       # Internal: Count player accuracy.
@@ -70,6 +73,8 @@ module CSstats
       #
       # Returns The Float of player accuracy.
       def count_accuracy(hits, shots)
+        return 0.0 if shots.to_f.zero?
+
         (hits.to_f / shots.to_f * 100).round(2)
       end
     end

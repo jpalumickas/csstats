@@ -4,8 +4,12 @@ describe CSstats::Players do
   let(:client) { CSstats::Client.new(path: csstats_file, maxplayers: 30) }
   let(:players) { client.players }
 
-  it 'has corrent players count' do
+  it 'has correct players count' do
     expect(players.count).to eq(30)
+  end
+
+  it 'returns players with all' do
+    expect(players.all.length).to eq(30)
   end
 
   it 'has array of Player class' do

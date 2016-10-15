@@ -2,7 +2,6 @@ require 'csstats/columns'
 require 'csstats/error'
 require 'csstats/player'
 require 'csstats/parser'
-require 'csstats/writer'
 require 'csstats/client'
 require 'csstats/players'
 

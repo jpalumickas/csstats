@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CSstats::Writer::Players do
+describe CSstats::Parser::Writer::Players do
   let(:old_players) { CSstats.new(path: csstats_file).players }
   let(:file_path) { tmp_file('test.dat') }
   let(:new_players) { CSstats.new(path: file_path).players }
@@ -11,11 +11,11 @@ describe CSstats::Writer::Players do
 
   context 'new file' do
     before do
-      CSstats::Writer::Players.new(old_players).write(file_path)
+      described_class.new(file_path).write(old_players)
     end
 
     it 'has correct players count' do
-      CSstats::Writer::Players.new(old_players).write(file_path)
+      described_class.new(file_path).write(old_players)
       expect(new_players.length).to eq(208)
     end
 

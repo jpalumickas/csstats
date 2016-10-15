@@ -30,6 +30,10 @@ module CSstats
       end
     end
 
+    def save
+      CSstats::Parser.write_players(client, players)
+    end
+
     def method_missing(method_name, *args, &block)
       return super unless respond_to?(method_name)
       players.send(method_name, *args, &block)

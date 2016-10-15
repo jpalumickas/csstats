@@ -29,14 +29,14 @@ Or install it yourself as:
 require 'csstats'
 
 stats = CSstats.new(path: 'csstats.dat')
-stats.player(2).nick
+stats.players.find(2).nick
 ```
 
-You can set maxplayers value if you need to get specified number of players.
+You can set `max_players` option if you need to get specified number of players.
 
 ```ruby
-stats = CSstats.new(path: 'csstats.dat', maxplayers: 15)
-stats.players_count
+stats = CSstats.new(path: 'csstats.dat', max_players: 15)
+stats.players.count
  # => 15
 ```
 
@@ -44,9 +44,10 @@ You can get player information by specified name.
 
 ```ruby
 stats = CSstats.new(path: 'csstats.dat')
-player_stats = stats.search_by_name('nick')
+player_stats = stats.players.find_by(nick: 'my-super-nick')
 
 puts player_stats.kills
+  # => 3
 ```
 
 ## Supported Ruby Versions

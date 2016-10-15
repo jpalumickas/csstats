@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CSstats::Players do
-  let(:client) { CSstats::Client.new(path: csstats_file, maxplayers: 30) }
+  let(:client) { CSstats::Client.new(path: csstats_file, max_players: 30) }
   let(:players) { client.players }
 
   it 'has correct players count' do

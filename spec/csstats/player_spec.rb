@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CSstats::Player do
-  let(:client) { CSstats::Client.new(path: csstats_file, maxplayers: 10) }
+  let(:client) { CSstats::Client.new(path: csstats_file, max_players: 10) }
   let(:players) { client.players }
 
   it 'sets attributes from options' do

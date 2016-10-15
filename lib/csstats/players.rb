@@ -42,9 +42,7 @@ module CSstats
     private
 
     def players
-      @players ||= CSstats::Parser::Players.new(
-        client.file_path, max_players: client.max_players
-      ).parse
+      @players ||= CSstats::Parser.get_players(client)
     end
   end
 end

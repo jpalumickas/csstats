@@ -1,38 +1,34 @@
 module CSstats
   module Writer
     class Player
-      attr_reader :player
+      attr_reader :handler, :player
 
-      def initialize(player)
+      def initialize(handler, player)
+        @handler = handler
         @player = player
       end
 
-      def write(handler)
-        write_nick(handler)
-        write_uniq(handler)
-        write_general_data(handler)
+      def write
+        CSstats::COLUMNS.each do |column|
+          if column.empty?
+            handler.write_int_data(0)
+            next
+          end
+
+          value = player.send(column[:name])
+          send("write_#{column[:type]}", value)
+        end
       end
 
       private
 
-      def write_nick(handler)
-        handler.write_short_data(player.nick.length + 1)
-        handler.write_string_data(player.nick)
+      def write_string(value)
+        handler.write_short_data(value.length + 1)
+        handler.write_string_data(value)
       end
 
-      def write_uniq(handler)
-        handler.write_short_data(player.uniq.length + 1)
-        handler.write_string_data(player.uniq)
-      end
-
-      def write_general_data(handler)
-        CSstats::Parser::Player::DATA_COLUMNS.each do |type|
-          if type == '-'
-            handler.write_int_data(0)
-          else
-            handler.write_int_data(player[type])
-          end
-        end
+      def write_integer(value)
+        handler.write_int_data(value)
       end
     end
   end

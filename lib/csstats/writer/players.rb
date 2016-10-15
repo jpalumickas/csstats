@@ -14,7 +14,7 @@ module CSstats
         handler.write_short_data(11) # File version
 
         players.each do |player|
-          CSstats::Writer::Player.new(player).write(handler)
+          CSstats::Writer::Player.new(handler, player).write
         end
 
         file.close

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe CSstats::Writer::Players do
-  let(:old_players) { CSstats::Handler.new(path: csstats_file).players }
+  let(:old_players) { CSstats.new(path: csstats_file).players }
   let(:file_path) { tmp_file('test.dat') }
-  let(:new_players) { CSstats::Handler.new(path: file_path).players }
+  let(:new_players) { CSstats.new(path: file_path).players }
 
   it 'has correct players count in main file' do
     expect(old_players.length).to eq(208)
@@ -20,7 +20,7 @@ describe CSstats::Writer::Players do
     end
 
     it 'has same players data' do
-      expect(old_players).to eq(new_players)
+      expect(old_players.map(&:as_json)).to eq(new_players.map(&:as_json))
     end
   end
 end

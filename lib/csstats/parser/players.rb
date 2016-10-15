@@ -21,15 +21,12 @@ module CSstats
       private
 
       def parse_player(handler, index, players)
-        player = player_parser.parse(handler)
+        player_parser = CSstats::Parser::Player.new(handler)
+        player = player_parser.parse
         return unless player
 
-        player['rank'] = index + 1
+        player.rank = index + 1
         players[index] = player
-      end
-
-      def player_parser
-        @player_parser ||= CSstats::Parser::Player.new
       end
 
       def file_reader

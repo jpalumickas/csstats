@@ -1,11 +1,7 @@
 require 'simplecov'
-require 'coveralls'
-require 'codeclimate-test-reporter'
 
 SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter,
-  CodeClimate::TestReporter::Formatter
+  SimpleCov::Formatter::HTMLFormatter
 ]
 
 SimpleCov.start
@@ -24,11 +20,11 @@ def csstats_file
 end
 
 def fixture_file(filename)
-  fixtures = File.expand_path('../fixtures', __FILE__)
+  fixtures = File.expand_path('fixtures', __dir__)
   File.join(fixtures, filename)
 end
 
 def tmp_file(filename)
-  tmps = File.expand_path('../tmp', __FILE__)
+  tmps = File.expand_path('tmp', __dir__)
   File.join(tmps, filename)
 end

@@ -1,5 +1,4 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'csstats/version'
 
@@ -14,7 +13,7 @@ Gem::Specification.new do |gem|
                     ' module in AMX Mod X (http://www.amxmodx.org/)'
 
   gem.license = 'MIT'
-  gem.required_ruby_version = '>= 1.9.2'
+  gem.required_ruby_version = '>= 2.1.0'
 
   gem.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   gem.executables = gem.files.grep(%r{^bin\/}).map { |f| File.basename(f) }

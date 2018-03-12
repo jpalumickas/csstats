@@ -61,7 +61,7 @@ implementations:
 * Ruby 2.3.0
 
 ## Copyright
-Copyright (c) 2013-2016 Justas Palumickas.
+Copyright (c) 2013-2018 Justas Palumickas.
 See [LICENSE][license] for details.
 
 [rubygems]: https://rubygems.org/gems/csstats

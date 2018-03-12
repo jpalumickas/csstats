@@ -1,13 +1,15 @@
+require 'csstats/columns'
 require 'csstats/error'
+require 'csstats/player'
 require 'csstats/parser'
-require 'csstats/writer'
-require 'csstats/handler'
+require 'csstats/client'
+require 'csstats/players'
 
 module CSstats
   # Alias for CSstats::Handler.new
   #
   # Returns CSstats::Handler
   def self.new(options = {})
-    CSstats::Handler.new(options)
+    CSstats::Client.new(options)
   end
 end

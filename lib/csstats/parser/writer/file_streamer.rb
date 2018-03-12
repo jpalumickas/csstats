@@ -1,26 +1,25 @@
 module CSstats
-  module Writer
-    class FileWriter
-      class Handler
-        attr_reader :handle
+  module Parser
+    module Writer
+      class FileStreamer
+        attr_reader :stream
 
-        def initialize(handle)
-          @handle = handle
+        def initialize(stream)
+          @stream = stream
         end
 
         def write_int_data(int)
           data = [int].pack('V')
-          handle.write(data)
+          stream.write(data)
         end
 
         def write_short_data(int)
           data = [int].pack('v')
-          handle.write(data)
+          stream.write(data)
         end
 
         def write_string_data(string)
-          data = "#{string}\x00"
-          handle.write(data)
+          stream.write(string)
         end
       end
     end

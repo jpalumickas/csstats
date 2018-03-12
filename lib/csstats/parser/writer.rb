@@ -1,8 +1,10 @@
-require_relative 'writer/file_writer/handler'
+require_relative 'writer/file_streamer'
 require_relative 'writer/player'
 require_relative 'writer/players'
 
 module CSstats
-  module Writer
+  module Parser
+    module Writer
+    end
   end
 end

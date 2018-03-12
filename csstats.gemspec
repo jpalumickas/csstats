@@ -21,5 +21,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'hashie', '~> 3.4'
-  gem.add_development_dependency 'bundler', '~> 1.6'
+  gem.add_development_dependency 'bundler', '~> 1.16'
 end

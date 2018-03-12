@@ -14,6 +14,10 @@ describe CSstats::Parser::Writer::Players do
       described_class.new(file_path).write(old_players)
     end
 
+    after do
+      FileUtils.rm(file_path)
+    end
+
     it 'has correct players count' do
       described_class.new(file_path).write(old_players)
       expect(new_players.length).to eq(208)

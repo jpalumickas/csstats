@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CSstats
   module Parser
     module Reader
@@ -15,7 +17,7 @@ module CSstats
           data = stream.read(4)
           raise CSstats::Error, 'Cannot read int data.' unless data
 
-          data.unpack('V').first
+          data.unpack1('V')
         end
 
         # Internal: Get the 16bit integer from file.
@@ -25,7 +27,7 @@ module CSstats
           data = stream.read(2)
           raise CSstats::Error, 'Cannot read short data.' unless data
 
-          data.unpack('v').first
+          data.unpack1('v')
         end
 
         # Internal: Get the String from file.

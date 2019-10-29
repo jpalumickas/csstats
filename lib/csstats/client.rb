@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CSstats
   class Client
     attr_reader :file_path, :max_players

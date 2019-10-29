@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CSstats
   class Players
     attr_reader :client
@@ -36,6 +38,7 @@ module CSstats
 
     def method_missing(method_name, *args, &block)
       return super unless respond_to?(method_name)
+
       players.send(method_name, *args, &block)
     end
 

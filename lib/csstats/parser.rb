@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'parser/reader'
 require_relative 'parser/writer'
 

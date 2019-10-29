@@ -2,10 +2,14 @@
 
 require 'simplecov'
 
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter
-]
+formatters = [SimpleCov::Formatter::HTMLFormatter]
 
+if ENV['CODECOV_TOKEN']
+  require 'codecov'
+  formatters << SimpleCov::Formatter::Codecov
+end
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(formatters)
 SimpleCov.start
 
 require 'csstats'

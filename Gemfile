@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 group :development do
-  gem 'rubocop', '~> 0.53'
+  gem 'rubocop', '~> 0.76'
 end
 
 group :development, :test do
@@ -9,8 +11,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec', '~> 3.7'
-  gem 'simplecov', '~> 0.15', require: false
+  gem 'rspec', '~> 3.9'
+  gem 'simplecov', '~> 0.17', require: false
 end
 
 gemspec

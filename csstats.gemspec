@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'csstats/version'
@@ -20,6 +22,6 @@ Gem::Specification.new do |gem|
   gem.test_files = gem.files.grep(%r{^(test|spec|features)\/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'hashie', '~> 3.4'
-  gem.add_development_dependency 'bundler', '~> 1.16'
+  gem.add_dependency 'hashie', '~> 3.5'
+  gem.add_development_dependency 'bundler', '~> 2.0'
 end
